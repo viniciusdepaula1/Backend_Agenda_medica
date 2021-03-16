@@ -4,7 +4,7 @@ const cors = require('cors');
 
 const app =  express();
 const router = express.Router();
-const mongoUrl = 'mongodb+srv://Vinicius:v123456@cluster0.ii8xk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const mongoUrl = '';
 
 const user = require('./routes/User');
 
