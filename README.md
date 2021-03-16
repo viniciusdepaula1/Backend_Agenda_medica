@@ -1,7 +1,7 @@
 # Projeto agenda médica
 
-BCC323 - Engenharia de Software II <br />
-Você precisa ter o yarn ou npm instalado, então execute:
+Para executar você vai precisar ter o yarn ou npm instalado, e vai precisar inserir a url do mongodb (em src/index.js na linha 7),
+para baixar as dependencias execute o comando:
 ### `yarn`
 Para rodar os testes:
 ### `yarn test`
