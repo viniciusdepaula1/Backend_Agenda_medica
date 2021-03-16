@@ -53,5 +53,10 @@ describe('User tests', () => {
             .send({id : user.id});
             
         expect(response.body.message).toBe("User deleted");
+
+        const find = await UserModel.findOne({ name: user.name, cpf: user.cpf }) !== null ? false : true
+        expect(find).toBe(true);
+
+        expect(response.status).toBe(200);
     })
 })

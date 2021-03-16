@@ -1,6 +1,9 @@
-const { listen } = require('..');
+// import models
 const UserModel = require('../models/User');
 
+/**
+ * Definições públicas
+ */
 module.exports = {
     async create(req, res) {
         const { name, cpf, age, phone } = req.body
