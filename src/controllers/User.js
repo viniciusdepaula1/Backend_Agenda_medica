@@ -1,6 +1,7 @@
 // import models
 const UserModel = require('../models/User');
 
+
 /**
  * Definições públicas
  */
@@ -55,5 +56,5 @@ module.exports = {
             console.log(err);
             return res.status(500).send({ error: 'Server request failed' });
         }
-    } 
+    }
 };
