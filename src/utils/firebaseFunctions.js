@@ -1,15 +1,18 @@
 //só uso isso nos testes
+require('dotenv').config();
 import app from 'firebase/app'
 import 'firebase/auth'
 
+//process.env.DB
+
 const firebaseConfig = {
-    apiKey: "AIzaSyAsYL41mkjOIOexCWK1ACL7vgrySS7zpxE",
-    authDomain: "agenda-medica-3418b.firebaseapp.com",
-    projectId: "agenda-medica-3418b",
-    storageBucket: "agenda-medica-3418b.appspot.com",
-    messagingSenderId: "162050477758",
-    appId: "1:162050477758:web:932e2c4c737d0dbcfcd8ef",
-    measurementId: "G-4V5SLEBL4L"
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId,
+    measurementId: process.env.measurementId
 };
 
 //simulando o frontend
