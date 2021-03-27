@@ -1,13 +1,14 @@
 // imports
 const express = require('express');
 const router = express.Router();
+const auth = require('./middlewares/auth');
 
 // cada controller define as funções que serão executadas em cada endpoint. 
 const UserController = require('../controllers/User');
 
 router.get('/list', UserController.list);
-router.post('/create', UserController.create);
-router.delete('/delete', UserController.delete);
+router.post('/create', auth.checkIfAuthenticated, UserController.create);
+router.delete('/delete', auth.checkIfAuthenticated, UserController.delete);
 
 
 module.exports = router;

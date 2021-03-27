@@ -45,7 +45,6 @@ module.exports = {
         const {id} = req.body;
 
         try {
-            console.log(id);
             const response = await UserModel.deleteOne({ _id : id });
 
             if(response)
