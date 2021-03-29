@@ -14,7 +14,7 @@ describe('Firebase functions', () => {
         jest.setTimeout(50000);
     })
 
-    it('Ca be created', async () => {
+    it('Can be created', async () => {
         const response = await firebaseFunctions.createUser(user.email, user.senha);
         expect(response).toBe(true);
     })
