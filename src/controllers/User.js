@@ -7,9 +7,9 @@ const UserModel = require('../models/User');
  */
 module.exports = {
     async create(req, res) {
-        const { name, cpf, age, phone } = req.body
+        const { name, cpf, age, phone, firebaseUID } = req.body
     
-        if(name == null || cpf == null || age == null || phone == null)
+        if(name == null || cpf == null || age == null || phone == null, firebaseUID == null)
             return res.status(206).send({ error: 'Insufficient data' });
 
         try {
@@ -20,7 +20,8 @@ module.exports = {
                 cpf: cpf,
                 name: name,
                 age: age,
-                phone: phone
+                phone: phone,
+                firebaseUID: firebaseUID
             });
 
             return res.status(201).send( { user })
@@ -42,10 +43,10 @@ module.exports = {
     },
 
     async delete(req, res) {
-        const {id} = req.body;
+        const {firebaseUID} = req.body;
 
         try {
-            const response = await UserModel.deleteOne({ _id : id });
+            const response = await UserModel.deleteOne({ firebaseUID : firebaseUID });
 
             if(response)
                 return res.status(200).send({ message: 'User deleted' });

@@ -18,6 +18,7 @@ describe('BD User tests', () => {
         await firebaseFunctions.createUser(user.email, user.senha);
         jest.setTimeout(50000);
         user.token = await firebaseFunctions.fGetIdToken();
+        user.firebaseUID = await firebaseFunctions.returnUID();
         jest.setTimeout(50000);
     });
 
@@ -37,7 +38,8 @@ describe('BD User tests', () => {
                 cpf : user.cpf,
                 name : user.name,
                 age : user.age,
-                phone : user.phone 
+                phone : user.phone,
+                firebaseUID : user.firebaseUID
             }).set("authorization", user.token)
                  
         expect(response.body.user.name).toBe(user.name)
@@ -60,7 +62,7 @@ describe('BD User tests', () => {
     it('Can be deleted', async () => {
         const response = await request(server)
             .delete('/user/delete')
-            .send({id : user.id})
+            .send({firebaseUID : user.firebaseUID})
             .set("authorization", user.token);
             
         expect(response.body.message).toBe("User deleted");

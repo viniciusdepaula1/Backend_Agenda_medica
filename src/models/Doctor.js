@@ -3,19 +3,23 @@ const mongoose = require('mongoose');
 const DoctorSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: true
     },
     cpf: {
         type: String,
-        required: true,
+        required: true
     },
     crm: {
         type: String,
-        required: true,
+        required: true
     },
-    specialty: {
+    phone: {
         type: String,
-        required: true,
+        required: true
+    },
+    specialities: {
+        type: [String],
+        required: false
     },
     age: {
         type: Number,
@@ -27,8 +31,12 @@ const DoctorSchema = new mongoose.Schema({
     },
     firebaseUID: {
         type: String,
-        required: false
+        required: true
     },
+    schedule: {
+        type: [Date],
+        required: false
+    }
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);

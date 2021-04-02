@@ -18,6 +18,7 @@ const mongoUrl = process.env.DB;
  * Importa rotas locais
  */
 const user = require('./routes/User');
+const doctor = require('./routes/Doctor');
 
 /**
  * Composição do app com json e cors.
@@ -44,6 +45,7 @@ mongoose.connection.on('connected', () => {
  * Cadastra subrota /user baseado em User.js
  */
 app.use('/user', user);
+app.use('/doctor', doctor);
 
 /**
  * Define rota de entrada
