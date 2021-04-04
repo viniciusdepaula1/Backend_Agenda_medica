@@ -19,6 +19,7 @@ const mongoUrl = process.env.DB;
  */
 const user = require('./routes/User');
 const doctor = require('./routes/Doctor');
+const medicalClinic = require('./routes/MedicalClinic')
 
 /**
  * Composição do app com json e cors.
@@ -46,6 +47,7 @@ mongoose.connection.on('connected', () => {
  */
 app.use('/user', user);
 app.use('/doctor', doctor);
+app.use('/medicalClinic', medicalClinic);
 
 /**
  * Define rota de entrada

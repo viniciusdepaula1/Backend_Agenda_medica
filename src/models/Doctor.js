@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const DateType = require('./Date');
 
 const DoctorSchema = new mongoose.Schema({
     name: {
@@ -19,7 +20,7 @@ const DoctorSchema = new mongoose.Schema({
     },
     specialities: {
         type: [String],
-        required: false
+        required: true
     },
     age: {
         type: Number,
@@ -29,12 +30,8 @@ const DoctorSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    firebaseUID: {
-        type: String,
-        required: true
-    },
     schedule: {
-        type: [Date],
+        type: [DateType],
         required: false
     }
 });

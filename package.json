@@ -8,6 +8,7 @@
     "test": "jest",
     "doctorTest": "jest doctor.test.js",
     "userTest": "jest users.test.js",
+    "clinicTest": "jest medicalClinic.test.js",
     "clear_cache": "jest --clearCache"
   },
   "dependencies": {
