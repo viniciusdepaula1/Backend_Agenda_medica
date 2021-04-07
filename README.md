@@ -7,7 +7,7 @@ para baixar as dependencias execute o comando:
 
 1.  `yarn`
 
-Para rodar os testes:
+Para executar os testes:
 
 2.  `yarn test`
 
