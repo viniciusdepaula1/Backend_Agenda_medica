@@ -1,21 +1,26 @@
 const mongoose = require('mongoose');
+const DateType = require('./Date');
 
 const DoctorSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: true
     },
     cpf: {
         type: String,
-        required: true,
+        required: true
     },
     crm: {
         type: String,
-        required: true,
+        required: true
     },
-    specialty: {
+    phone: {
         type: String,
-        required: true,
+        required: true
+    },
+    specialities: {
+        type: [String],
+        required: true
     },
     age: {
         type: Number,
@@ -25,10 +30,10 @@ const DoctorSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-    firebaseUID: {
-        type: String,
+    schedule: {
+        type: [DateType],
         required: false
-    },
+    }
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);

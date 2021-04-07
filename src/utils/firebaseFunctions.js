@@ -48,6 +48,10 @@ module.exports = {
         return auth.currentUser;
     },
 
+    async returnUID() {
+        return auth.currentUser.uid; 
+    },
+
     async checkUser() {
         if (auth.currentUser)
             return true
