@@ -8,6 +8,7 @@ const DoctorController = require('../controllers/Doctor');
 
 router.post('/create', auth.clinicClaimsMiddleware, DoctorController.create);
 router.post('/addDate', auth.userClaimsMiddleware, DoctorController.addDate);
+router.get('/searchDoctors', auth.userClaimsMiddleware, DoctorController.searchDoctors);
 router.delete('/delete', auth.clinicClaimsMiddleware, DoctorController.delete);
 router.delete('/deleteDate', auth.userClaimsMiddleware, DoctorController.deleteDate);
 

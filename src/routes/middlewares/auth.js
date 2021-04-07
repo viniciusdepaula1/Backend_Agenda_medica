@@ -27,7 +27,6 @@ const createMiddlewareClaims = (req, res, next) => {
             }
 
             if (req.body.cpf) {
-                console.log("setando claims user")
                 await admin.auth().setCustomUserClaims(req.authId, { type: 'user' })
                 return next();
             }

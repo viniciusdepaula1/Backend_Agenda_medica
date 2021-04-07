@@ -1,4 +1,4 @@
-const { server } = require('../src/index');
+const { app } = require('../src/index');
 const { mongoose } = require('../src/index');
 const request = require('supertest');
 const UserModel = require('../src/models/User');
@@ -25,6 +25,7 @@ const doctor = {
     senha: "1234567",
 }
 
+
 describe('BD User tests', () => {
     beforeAll(async () => {
         await firebaseFunctions.createUser(user.email, user.senha);
@@ -39,12 +40,11 @@ describe('BD User tests', () => {
     });
 
     afterAll(async () => {
-        server.close();
         await mongoose.connection.close();
     });
 
     it('Can be created', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .post('/user/create')
             .send({
                 cpf: user.cpf,
@@ -73,7 +73,7 @@ describe('BD User tests', () => {
 
     it('Can add one date', async () => {
         const insertDate = new Date(2021, 4, 2, 18, 30)
-        const response = await request(server)
+        const response = await request(app)
             .post('/doctor/addDate')
             .send({
                 Data: insertDate, 
@@ -96,7 +96,7 @@ describe('BD User tests', () => {
 
         const insertDate = doctorTest.schedule[0]._id;
 
-        const response = await request(server)
+        const response = await request(app)
             .delete('/doctor/deleteDate')
             .send({
                 date: insertDate,
@@ -107,8 +107,57 @@ describe('BD User tests', () => {
         expect(response.status).toBe(200)
     })
 
+    it('Can search doctor by specialty', async() => {
+        const specialty = "especialidade2"
+
+        const response = await request(app)
+            .get("/doctor/searchDoctors")
+            .send({
+                specialty: specialty
+            }).set("authorization", user.token)
+
+        expect(response.body.doctors.length).toBe(2)
+        expect(response.status).toBe(200)
+    })
+
+    it('Can search doctor by crm', async() => {
+        const crm = "012345"
+
+        const response = await request(app)
+        .get("/doctor/searchDoctors")
+        .send({
+            crm: crm
+        }).set("authorization", user.token)
+
+        expect(response.body.doctors.length).toBe(1)
+        expect(response.status).toBe(200)
+    })
+
+    it('Can search clinic by cnpj', async() => {
+        //seachClinic
+        const response = await request(app)
+        .get("/medicalClinic/seachClinic")
+        .send({
+            cnpj: "24737110000100"
+        }).set("authorization", user.token)
+
+        expect(response.status).toBe(200)
+    })
+
+    it('Can search clinic by name', async() => {
+        //seachClinic
+        const response = await request(app)
+        .get("/medicalClinic/seachClinic")
+        .send({
+            name: "ClinicaTal"
+        }).set("authorization", user.token)
+
+        expect(response.status).toBe(200)
+    })
+
+
     it('Can be deleted', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .delete('/user/delete')
             .send({ firebaseUID: user.firebaseUID })
             .set("authorization", user.token);

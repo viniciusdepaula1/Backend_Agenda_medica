@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon src/index.js",
-    "test": "jest",
+    "test": "jest --forceExit",
     "doctorTest": "jest doctor.test.js",
     "userTest": "jest users.test.js",
     "clinicTest": "jest medicalClinic.test.js",

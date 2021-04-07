@@ -13,6 +13,9 @@ module.exports = {
             if (await DoctorModel.findOne({ cpf: cpf }))
                 return res.status(400).send({ error: 'Doctor already exists.' });
 
+            if (await DoctorModel.findOne({ crm: crm}))
+                return res.status(400).send({ error: 'Doctor already exists.' });
+
             const doctor = await DoctorModel.create({
                 cpf: cpf,
                 name: name,
@@ -102,14 +105,38 @@ module.exports = {
         }
     },
 
+    async searchDoctors(req, res) {
+        const { specialty, crm } = req.body;
+
+        if(specialty != null) {
+            const doctors = await DoctorModel.find({ specialities: specialty })
+
+            if(doctors){
+                res.status(200).send({ doctors })
+            } else {
+                return res.status(400).send({ error: 'Doctor not found' });
+            }
+        } else if(crm) {
+            const doctors = await DoctorModel.find({ crm: crm })
+
+            if(doctors){
+                res.status(200).send({ doctors })
+            } else {
+                return res.status(400).send({ error: 'Doctor not found' });
+            }
+        }
+    },
+
     async delete(req, res) {
         const { cpf, name } = req.body;
+
+        if (name == null || cpf == null)
+            return res.status(206).send({ error: 'Insufficient data' });
 
         try {
             const response = await DoctorModel.findOne({ name: name, cpf: cpf })
 
             if (response) {
-                console.log(response);
                 await response.delete();
                 return res.status(200).send({ message: 'Doctor deleted' });
             }

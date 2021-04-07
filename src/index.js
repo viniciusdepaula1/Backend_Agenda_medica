@@ -10,7 +10,7 @@ const cors = require('cors');
 /**
  * Inicialização de variáveis globais
  */
-const app =  express();
+const app = express();
 const router = express.Router();
 const mongoUrl = process.env.DB;
 
@@ -34,7 +34,7 @@ mongoose.connect(mongoUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-});
+}).then(() => {})
 
 // verifica se a conexão foi realizada com sucesso.
 mongoose.connection.on('connected', () => {
@@ -60,12 +60,17 @@ app.use(router.get('/', (req, res) => {
 // configura porta 
 app.set('PORT', process.env.PORT || 3333);
 
-// startar o servidor
-const server = app.listen(app.get('PORT'), () => {
-    console.log(`Server running on port ${app.get('PORT')}`)
-});
+var server = null;
+
+if (process.env.NODE_ENV !== 'test') {  
+    // startar o servidor
+    server = app.listen(app.get('PORT'), () => {
+        console.log(`Server running on port ${app.get('PORT')}`)
+    });
+} 
 
 module.exports = {
     server,
-    mongoose
+    mongoose,
+    app
 }

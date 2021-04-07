@@ -1,4 +1,4 @@
-const {server} = require('../src/index');
+const {app} = require('../src/index');
 const {mongoose} = require('../src/index');
 const request = require('supertest');
 const MCModel = require('../src/models/MedicalClinic');
@@ -17,7 +17,7 @@ const clinic = {
 const doctor = {
     name: "Doctor1",
     cpf: (Math.floor(Math.random() * (100000))).toString(),
-    crm: "012345",
+    crm: "0923499",
     age: 21,
     phone: "31 9 2123-3213",
     specialities: ["especialidade1", "especialidade2", "especialidade3"],
@@ -26,17 +26,13 @@ const doctor = {
 }
 
 const doctor1 = {
-    crm: "545454",
+    crm: "0123499",
 }
 
 const doctorsList = [{
-        crm: "549454",
+        crm: "012345",
     }, {
-        crm: "012945",
-    }, {  
-        crm: "322112",
-    },{
-        crm: "324354",
+        crm: "012341",
     }
 ]
 
@@ -54,12 +50,11 @@ describe('BD Clinic test', () => {
     });
 
     afterAll(async () => {
-        server.close();
         await mongoose.connection.close();
     });
 
     it('Can be created', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .post('/medicalClinic/create')
             .send({
                 cnpj : clinic.cnpj,
@@ -76,7 +71,7 @@ describe('BD Clinic test', () => {
     })
 
     it('Can create one doctor', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .post('/doctor/create')
             .send({
                 cpf : doctor.cpf,
@@ -100,7 +95,7 @@ describe('BD Clinic test', () => {
     })
 
     it('Can delete one doctor', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .delete('/doctor/delete')
             .send({
                 cpf: doctor.cpf,
@@ -115,7 +110,7 @@ describe('BD Clinic test', () => {
     })
 
     it('Can add one doctor in my list', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .post('/medicalClinic/addDoctor')
             .send({
                 crm: doctor1.crm,
@@ -130,7 +125,7 @@ describe('BD Clinic test', () => {
     })
 
     it('Can add list of doctors in my list', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .post('/medicalClinic/addDoctor')
             .send({
                 crm: doctorsList,
@@ -139,13 +134,39 @@ describe('BD Clinic test', () => {
 
         const list = response.body.MedicalClinic.DoctorsList; 
 
-        expect(list.length).toBe(5)
+        expect(list.length).toBe(3)
 
         expect(response.status).toBe(201)
     })
 
+    it('Can delete one doctor of my list', async () => {
+        const response = await request(app)
+            .post('/medicalClinic/deleteDoctor')
+            .send({
+                crm: "012341",
+                firebaseUID: clinic.firebaseUID
+            }).set("authorization", clinic.token)
+
+            const list = response.body.MedicalClinic2.DoctorsList; 
+
+            expect(list.length).toBe(2)
+    
+            expect(response.status).toBe(201)
+    })
+
+    it('Can get all doctors', async () => {
+        const response = await request(app)
+            .get('/medicalClinic/returnDoctors')
+            .send({
+                firebaseUID: clinic.firebaseUID
+            }).set("authorization", clinic.token)    
+        
+        expect(response.status).toBe(200)
+        expect(response.body.doctorsList.length).toBe(2)
+    })
+
     it('Can be deleted', async () => {
-        const response = await request(server)
+        const response = await request(app)
             .delete('/medicalClinic/delete')
             .send({
                 firebaseUID: clinic.firebaseUID
