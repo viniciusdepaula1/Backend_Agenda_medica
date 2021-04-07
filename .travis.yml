@@ -8,7 +8,7 @@ node_js:
 branches:
   only:
     - master
-    - dev
+    - develop
 
 before_script:
   - yarn install
