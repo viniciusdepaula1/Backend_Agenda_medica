@@ -1,19 +1,17 @@
+# Travis-CI Build for ltr++ library
+
 language: node_js
 
 node_js:
-# Versão do node que é utilizada no projeto.
-  - 10
+  - "10"
 
 branches:
   only:
     - master
-    - develop
+    - dev
 
-# Script que tem que ser executado antes do antes do script "principal"
 before_script:
   - yarn install
 
-# Script "principal"
 script:
-# Script de teste encontrado no package.json
   - yarn test
