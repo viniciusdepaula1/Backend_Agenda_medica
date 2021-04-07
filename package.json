@@ -5,7 +5,10 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon src/index.js",
-    "test": "jest",
+    "test": "jest --forceExit",
+    "doctorTest": "jest doctor.test.js",
+    "userTest": "jest users.test.js",
+    "clinicTest": "jest medicalClinic.test.js",
     "clear_cache": "jest --clearCache"
   },
   "dependencies": {
@@ -17,7 +20,6 @@
     "nodemon": "^2.0.7"
   },
   "devDependencies": {
-    "axios": "^0.21.1",
     "babel-jest": "^26.6.3",
     "firebase": "^8.3.1",
     "jest": "^26.6.3",

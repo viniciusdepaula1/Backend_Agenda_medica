@@ -25,6 +25,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    dates: {
+        type: Number,
+        required: false
+    }
 });
 
 module.exports = mongoose.model('User', UserSchema);

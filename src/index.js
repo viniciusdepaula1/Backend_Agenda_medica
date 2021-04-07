@@ -10,7 +10,7 @@ const cors = require('cors');
 /**
  * Inicialização de variáveis globais
  */
-const app =  express();
+const app = express();
 const router = express.Router();
 const mongoUrl = process.env.DB;
 
@@ -18,6 +18,8 @@ const mongoUrl = process.env.DB;
  * Importa rotas locais
  */
 const user = require('./routes/User');
+const doctor = require('./routes/Doctor');
+const medicalClinic = require('./routes/MedicalClinic')
 
 /**
  * Composição do app com json e cors.
@@ -32,7 +34,7 @@ mongoose.connect(mongoUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-});
+}).then(() => {})
 
 // verifica se a conexão foi realizada com sucesso.
 mongoose.connection.on('connected', () => {
@@ -44,6 +46,8 @@ mongoose.connection.on('connected', () => {
  * Cadastra subrota /user baseado em User.js
  */
 app.use('/user', user);
+app.use('/doctor', doctor);
+app.use('/medicalClinic', medicalClinic);
 
 /**
  * Define rota de entrada
@@ -56,12 +60,17 @@ app.use(router.get('/', (req, res) => {
 // configura porta 
 app.set('PORT', process.env.PORT || 3333);
 
-// startar o servidor
-const server = app.listen(app.get('PORT'), () => {
-    console.log(`Server running on port ${app.get('PORT')}`)
-});
+var server = null;
+
+if (process.env.NODE_ENV !== 'test') {  
+    // startar o servidor
+    server = app.listen(app.get('PORT'), () => {
+        console.log(`Server running on port ${app.get('PORT')}`)
+    });
+} 
 
 module.exports = {
     server,
-    mongoose
+    mongoose,
+    app
 }
