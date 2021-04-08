@@ -5,16 +5,6 @@ language: node_js
 node_js:
   - "10"
 
-env:
-  - DB=$DB
-  - apiKey=$apiKey
-  - authDomain=$authDomain
-  - projectId=$projectId
-  - storageBucket=$storageBucket
-  - messagingSenderId=$messagingSenderId
-  - appId=$appId
-  - measurementId=$measurementId
-
 branches:
   only:
     - master
