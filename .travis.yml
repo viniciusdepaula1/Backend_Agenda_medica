@@ -2,15 +2,13 @@
 
 language: node_js
 
-node_js:
-  - "10"
-
 branches:
   only:
     - master
     - develop
 
-before_script:
+install:
+  - yarn
   - yarn install
 
 script:
