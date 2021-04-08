@@ -1,0 +1,16 @@
+# Travis-CI Build for ltr++ library
+
+language: node_js
+node_js:
+  - "10"
+
+branches:
+  only:
+    - master
+    - develop
+
+install:
+  - yarn install
+
+script:
+  - yarn test
