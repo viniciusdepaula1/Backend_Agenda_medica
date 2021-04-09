@@ -14,7 +14,7 @@ install:
   - yarn add codecov --dev
 
 script:
-  - yarn jest --collect-coverage
+  - yarn test
 
 after_success: 
   - codecov --disable=gcov -f ./coverage/lcov.info
