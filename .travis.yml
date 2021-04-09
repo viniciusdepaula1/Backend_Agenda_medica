@@ -11,10 +11,6 @@ branches:
 
 install:
   - yarn install
-  - yarn add codecov --dev
 
 script:
   - yarn test
-
-after_success: 
-  - codecov --disable=gcov -f ./coverage/lcov.info
