@@ -14,4 +14,7 @@ install:
   - yarn add codecov --dev
 
 script:
-  - yarn test && codecov --disable=gcov
+  - yarn test
+
+after_success: 
+  - codecov -f ./coverage/clover.xml # remove -f ./coverage/clover.xml to make it fail
