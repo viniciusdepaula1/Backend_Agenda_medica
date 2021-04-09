@@ -14,4 +14,7 @@ install:
   - yarn add codecov --dev
 
 script:
-  - yarn test && codecov
+  - yarn test
+
+after_success: 
+  - codecov --disable=gcov -f ./coverage/lcov.info
