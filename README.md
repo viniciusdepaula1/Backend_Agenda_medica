@@ -1,3 +1,6 @@
+[![codecov](https://codecov.io/gh/marcosfpr/bcc323/branch/main/graph/badge.svg?token=A2I7WLZ7YB)](https://codecov.io/gh/marcosfpr/bcc323)
+[![Build Status](https://travis-ci.com/marcosfpr/bcc323.svg?branch=main)](https://travis-ci.com/marcosfpr/bcc323)
+
 # bcc323
 BCC323 - Engenharia de Software II
 
