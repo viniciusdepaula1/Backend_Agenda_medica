@@ -15,6 +15,7 @@ install:
 
 script:
   - yarn test
+  - yarn jest --collect-coverage
 
 after_success: 
-  - codecov -f ./coverage/clover.xml # remove -f ./coverage/clover.xml to make it fail
+  - codecov --disable=gcov -f ./coverage/lcov.info
