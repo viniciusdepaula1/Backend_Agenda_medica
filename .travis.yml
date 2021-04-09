@@ -14,7 +14,6 @@ install:
   - yarn add codecov --dev
 
 script:
-  - yarn test
   - yarn jest --collect-coverage
 
 after_success: 
