@@ -13,4 +13,7 @@ install:
   - yarn install
 
 script:
-  - yarn test
+  - yarn jest --colect-coverage
+
+after_success:
+  - 
