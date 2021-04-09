@@ -14,4 +14,4 @@ install:
   - yarn add codecov --dev
 
 script:
-  - yarn test && codecov
+  - yarn test && codecov --disable=gcov
