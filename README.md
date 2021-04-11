@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/marcosfpr/bcc323.svg?branch=main)](https://travis-ci.com/marcosfpr/bcc323)
+
 # bcc323
 BCC323 - Engenharia de Software II
 
