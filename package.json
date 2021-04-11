@@ -30,12 +30,7 @@
   },
   "jest": {
     "testEnvironment": "node",
-<<<<<<< HEAD
-    "collectCoverage": true,
-    "coverageReporters": ["json", "html"]
-=======
     "coverageDirectory": "./coverage/",
     "collectCoverage": true
->>>>>>> upstream/main
   }
 }
